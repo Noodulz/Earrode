@@ -1,11 +1,9 @@
-# Sample Snack app
+# Earode
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+Earode is a React mobile app that quizzes you on the keys of various scales and chords in order to develop ear training and memorization. Initially
+I'd wanted to create a simplified quiz app that could test me on identifying what key are certain sounds in, especially after trying out many
+other apps that didn't quite work or were too fleshed out. This project is a culmination of my goals of hoping to be better at identifying what key
+are songs and scales in in order to then better my skills in piano and guitar. 
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo-cli](https://docs.expo.io/get-started/installation).
-
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
-
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.io/c/snack).
-
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+The app can be demoed [here](https://snack.expo.dev/6YOTphjU1), an API of questions along with audio file support is currently being developed hence
+the placeholder of random trivia questions.
