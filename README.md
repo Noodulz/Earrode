@@ -7,3 +7,5 @@ are songs and scales in in order to then better my skills in piano and guitar.
 
 The app can be demoed [here](https://snack.expo.dev/6YOTphjU1), an API of questions along with audio file support is currently being developed hence
 the placeholder of random trivia questions.
+
+![screen demo](https://github.com/Noodulz/Earode/blob/main/assets/images/earode-screencap.png)
