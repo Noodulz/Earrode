@@ -1,0 +1,64 @@
+{
+  "scales": [
+    {
+      "name": "C Major",
+      "file_path": "assets/audio/c_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": "C#/D Flat Major",
+      "file_path": "assets/audio/csharp_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": "D Major",
+      "file_path": "assets/audio/d_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": " D#/E Flat Major",
+      "file_path": "assets/audio/dsharp_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": "E Major",
+      "file_path": "assets/audio/e_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": "F Major",
+      "file_path": "assets/audio/F_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": "F#/G Flat Major",
+      "file_path": "assets/audio/fsharp_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": "G Major",
+      "file_path": "assets/audio/g_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": "G#/A Flat Major",
+      "file_path": "assets/audio/gsharp_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": "A Major",
+      "file_path": "assets/audio/a_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": "A#/B Flat Major",
+      "file_path": "assets/audio/asharp_scale.mp3",
+      "duration": "0:04"
+    },
+    {
+      "name": "B/C Flat Major",
+      "file_path": "assets/audio/b_scale.mp3",
+      "duration": "0:04"
+    }
+  ]
+}
