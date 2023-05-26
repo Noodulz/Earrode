@@ -1,4 +1,4 @@
-# Earode
+# Earrode
 
 Earode is a React mobile app that quizzes you on the keys of various scales and chords in order to develop ear training and memorization. Initially
 I'd wanted to create a simplified quiz app that could test me on identifying what key are certain sounds in, especially after trying out many
