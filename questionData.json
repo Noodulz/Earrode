@@ -1,0 +1,88 @@
+{
+  "results": [
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "C Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "C#/D Flat Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "D Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "D#/E Flat Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "E Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "F Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "F#/G Flat Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "G Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "G#/A Flat Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "A Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "A#/B Flat Major"
+  },
+  {
+    "category": "scale",
+    "type": "multiple",
+    "difficulty": "easy",
+    "question": "What key is this scale in?",
+    "correct_answer": "B/C Flat Major"
+  }
+  ]
+}
