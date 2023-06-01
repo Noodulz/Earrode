@@ -1,109 +1,141 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import MyStack from '../navigation/index.js';
+import { Audio } from 'expo-av';
+import audioData from '../audioData.json';
+import questionData from '../questionData.json';
+import SoundPlayer from 'react-native-sound-player';
+import { Asset } from 'expo-asset';
 
-const shuffleArray=(array)=> {
+
+const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-}
+};
 
-const Quiz = ({navigation}) => {
-  const [questions, setQuestions] = useState();
-  const [ques, setQues] = useState(0);
-  const [options, setOptions]= useState([])
-  const [score, setScore]= useState(0)
-  const [isLoading, setIsLoading]= useState(false)
-  
-  const getQuiz = async () => {
-    setIsLoading(true)
-    const url = 'https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986';
-    const res = await fetch(url);
-    const data = await res.json();
-    console.log(data.results);
-    setQuestions(data.results);
-    setOptions(generateOptionsAndShuffle(data.results[0]))
-    setIsLoading(false)
-  };
+
+
+const Quiz = ({ navigation }) => {
+  const [options, setOptions] = useState([]);
+  const [score, setScore] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [sound, setSound] = useState(null);
+  const soundRef = useRef(null);
+  const c_scale = require('../assets/audio/c_scale.mp3');
+  const csharp_scale = require('../assets/audio/csharp_scale.mp3');
+  const d_scale = require('../assets/audio/d_scale.mp3');
 
   useEffect(() => {
     getQuiz();
+    return () => {
+      // Unload the sound when component unmounts
+      sound && sound.unloadAsync();
+    };
   }, []);
 
-  const handleNextPress=()=>{
-    setQues(ques+1)
-    setOptions(generateOptionsAndShuffle(questions[ques+1]))
-  }
+  const loadAudio = async () => {
+    const audioPromises = audioData.scales.map(async (scale) => {
+      const soundObject = new Audio.Sound();
+      try {
+        await soundObject.loadAsync(require(scale.file_path));
+        return {
+          ...scale,
+          soundObject,
+        };
+      } catch (error) {
+        console.error('Error loading audio:', error);
+        return null;
+      }
+    });
 
-  const generateOptionsAndShuffle=(_question)=>{
-    const options= [..._question.incorrect_answers]
-    options.push(_question.correct_answer)
- 
-    shuffleArray(options)
-    
-    return options
-  }
+    const loadedAudio = await Promise.all(audioPromises);
+    setAudioData(loadedAudio.filter((scale) => scale !== null));
+  };
+  
+  const generateOptionsAndShuffle = (_audioFiles) => {
+    const options = [..._audioFiles];
+    shuffleArray(options);
 
-  const handlSelectedOption=(_option)=>{
-    if(_option===questions[ques].correct_answer){
-      setScore(score+10)
-    }
-    if(ques!==9){
-      setQues(ques+1)
-      setOptions(generateOptionsAndShuffle(questions[ques+1]))
-    }
-    if(ques===9){
-      handleShowResult()
-    }
-  }
+    // Select the first four options
+    const selectedOptions = options.slice(0, 4);
 
-  const handleShowResult=()=>{
+    return selectedOptions.map(option => ({
+      name: option.name,
+      audio_url: option.file_path
+    }));
+  };
+
+  const getQuiz = () => {
+    setIsLoading(true);
+
+    const scales = audioData.scales;
+    const options = generateOptionsAndShuffle(scales);
+    setOptions(options);
+
+    // Load audio for the current question
+    const { audio_url } = options[0];
+    loadAudio(audio_url);
+
+    setIsLoading(false);
+  };
+
+
+  const handleNextPress = async () => {
+    if (currentQuestionIndex < audioData.length - 1) {
+      const nextQuestionIndex = currentQuestionIndex + 1;
+      setCurrentQuestionIndex(nextQuestionIndex);
+      const scale = audioData[nextQuestionIndex];
+      await scale.soundObject.playAsync();
+    }
+  };
+
+  
+  const handleShowResult = () => {
     navigation.navigate('Result', {
-      score: score
-    })
-  }
+      score: score,
+    });
+  };
 
   return (
     <View style={styles.container}>
-      {isLoading ? <View style={{display:'flex', justifyContent:'center', alignItems:'center', height:'100%'}}>
-        <Text style={{fontSize:32, fontWeight:'700'}}>LOADING...</Text>
-      </View> : questions && (
+      {isLoading ? (
+        <View style={styles.loadingContainer}>
+          <Text style={styles.loadingText}>LOADING...</Text>
+        </View>
+      ) : (
         <View style={styles.parent}>
           <View style={styles.top}>
-            <Text style={styles.question}>Q. {decodeURIComponent(questions[ques].question)}</Text>
+            <Text style={styles.question}>
+              Q. {decodeURIComponent(questionData.results[currentQuestion].question)}
+            </Text>
           </View>
           <View style={styles.options}>
-              
-            <TouchableOpacity style={styles.optionButtom} onPress={()=>handlSelectedOption(options[0])}>
-              <Text style={styles.option}>{decodeURIComponent(options[0])}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.optionButtom} onPress={()=>handlSelectedOption(options[1])}>
-              <Text style={styles.option}>{decodeURIComponent(options[1])}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.optionButtom} onPress={()=>handlSelectedOption(options[2])}>
-              <Text style={styles.option}>{decodeURIComponent(options[2])}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.optionButtom} onPress={()=>handlSelectedOption(options[3])}>
-              <Text style={styles.option}>{decodeURIComponent(options[3])}</Text>
-            </TouchableOpacity>
+            {options.map((option, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.optionButtom}
+                onPress={() => handleSelectedOption(option.name)}
+              >
+                <Text style={styles.option}>{option.name}</Text>
+              </TouchableOpacity>
+            ))}
           </View>
           <View style={styles.bottom}>
-            {/* <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>PREV</Text>
-            </TouchableOpacity> */}
-
-{ques!==9 &&<TouchableOpacity style={styles.button} onPress={handleNextPress}>
-              <Text style={styles.buttonText}>SKIP</Text>
-            </TouchableOpacity> }
-
-{ques===9 &&<TouchableOpacity style={styles.button} onPress={handleShowResult}>
-              <Text style={styles.buttonText}>SHOW RESULTS</Text>
-            </TouchableOpacity> }
-            
+            {currentQuestion < questionData.results.length - 1 ? (
+              <TouchableOpacity style={styles.button} onPress={handleNextPress}>
+                <Text style={styles.buttonText}>SKIP</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={styles.button} onPress={handleShowResult}>
+                <Text style={styles.buttonText}>SHOW RESULTS</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       )}
