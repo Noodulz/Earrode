@@ -4,7 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 const Title = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Earode</Text>
+      <Text style={styles.title}>Earrode</Text>
     </View>
   );
 };
