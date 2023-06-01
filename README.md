@@ -7,4 +7,4 @@ are songs and scales in in order to then better my skills in piano and guitar.
 
 The app can be demoed [here](https://snack.expo.dev/6YOTphjU1), question bank in development
 
-![screen demo](https://github.com/Noodulz/Earode/blob/main/assets/images/earode-screencap.png)
+![screen demo](https://github.com/Noodulz/Earode/blob/main/assets/images/earrode-screencap.png)
